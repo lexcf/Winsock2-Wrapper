@@ -1,6 +1,6 @@
 #pragma once
 
 typedef void(*OnClientConnectCallback)();
-typedef void(*OnDataReceived)(char*);
+typedef void(*OnDataReceivedCallback)(char*);
 
 #define DEFAULT_BUFF 1024
