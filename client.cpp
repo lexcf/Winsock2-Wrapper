@@ -54,6 +54,8 @@ bool WsWrapper::Client::init(PCSTR Server, PCSTR Port, int protocol, OnClientCon
 	return true;
 }
 
+
+//send message
 bool WsWrapper::Client::send_data(const char* sendChar) {
 	bool b_result;
 
@@ -65,9 +67,13 @@ bool WsWrapper::Client::send_data(const char* sendChar) {
 	return true;
 }
 
+
+//listen and call callback-function
 void WsWrapper::Client::listen(OnDataReceived dataReceived) {
 	int i_result;
 	char c_rec[DEFAULT_BUFF];
+
+	//receive after connection established
 	do {
 		memset(c_rec, 0, DEFAULT_BUFF);
 		i_result = recv(Socket_Client, c_rec, DEFAULT_BUFF, 0);
@@ -75,10 +81,12 @@ void WsWrapper::Client::listen(OnDataReceived dataReceived) {
 			dataReceived(c_rec);
 		}
 	} while (i_result > 0);
+	//close socket if connection refused
 	closesocket(Socket_Client);
 	WSACleanup();
 }
 
+//close socket
 void WsWrapper::Client::close() {
 	if (shutdown(Socket_Client, SD_BOTH) == SOCKET_ERROR) {
 		closesocket(Socket_Client);
