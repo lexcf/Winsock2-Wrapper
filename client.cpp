@@ -67,5 +67,14 @@ bool WsWrapper::Client::send_data(const char* sendChar) {
 
 void WsWrapper::Client::listen(OnDataReceived dataReceived) {
 	int i_result;
-	TCHAR c_rec[DEFAULT_BUFF];
+	char c_rec[DEFAULT_BUFF];
+	do {
+		memset(c_rec, 0, DEFAULT_BUFF);
+		i_result = recv(Socket_Client, c_rec, DEFAULT_BUFF, 0);
+		if (i_result > 0) {
+			dataReceived(c_rec);
+		}
+	} while (i_result > 0);
+	closesocket(Socket_Client);
+	WSACleanup();
 }
