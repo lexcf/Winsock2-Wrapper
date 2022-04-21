@@ -78,3 +78,10 @@ void WsWrapper::Client::listen(OnDataReceived dataReceived) {
 	closesocket(Socket_Client);
 	WSACleanup();
 }
+
+void WsWrapper::Client::close() {
+	if (shutdown(Socket_Client, SD_BOTH) == SOCKET_ERROR) {
+		closesocket(Socket_Client);
+		WSACleanup();
+	}
+}
