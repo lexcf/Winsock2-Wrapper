@@ -23,9 +23,9 @@ namespace WsWrapper {
 	class Client {
 	public:
 		SOCKET Socket_Client;
-		bool init(PCSTR, PCSTR, int, OnClientConnectCallback);
-		bool send_data(const char*);
-		void listen(OnDataReceived);
+		bool init(PCSTR Server, PCSTR port, int protocol, OnClientConnectCallback clientConnect);
+		bool send_data(const char* sendChar);
+		void listen(OnDataReceivedCallback dataReceived);
 		void close();
 	};
 
