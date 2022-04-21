@@ -69,7 +69,7 @@ bool WsWrapper::Client::send_data(const char* sendChar) {
 
 
 //listen and call callback-function
-void WsWrapper::Client::listen(OnDataReceived dataReceived) {
+void WsWrapper::Client::listen(OnDataReceivedCallback dataReceived) {
 	int i_result;
 	char c_rec[DEFAULT_BUFF];
 
