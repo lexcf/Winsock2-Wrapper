@@ -37,7 +37,7 @@ namespace WsWrapper {
 		SOCKET Socket_Listen;
 		SOCKET Socket_Client;
 		bool init(PCSTR port, int protocol, OnServerClientAcceptCallback clientAccept);
-		void send_data(SOCKET clientSocket, const char* sendChar);
+		bool send_data(SOCKET clientSocket, const char* sendChar);
 	private:
 		struct server_params* sParams;
 	};
