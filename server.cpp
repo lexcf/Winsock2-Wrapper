@@ -40,6 +40,7 @@ bool WsWrapper::Server::init(PCSTR port, int protocol, OnServerClientAcceptCallb
 
 }
 
+//listening thread
 void WsWrapper::t_start_listening(LPVOID lpParams) {
 	//get params
 	struct server_params* sParams = (server_params*)lpParams;
@@ -66,5 +67,14 @@ void WsWrapper::t_start_listening(LPVOID lpParams) {
 
 		callback(Socket_Client, &client);
 	}
+}
+
+bool WsWrapper::Server::send_data(SOCKET clientSocket, const char* sendChar) {
+	if (send(clientSocket, sendChar, (int)strlen(sendChar), 0) == SOCKET_ERROR) {
+		closesocket(clientSocket);
+		WSACleanup();
+		return false;
+	}
+	return true;
 }
 
