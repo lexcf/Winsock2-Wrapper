@@ -50,7 +50,7 @@ bool WsWrapper::Client::init(PCSTR Server, PCSTR Port, int protocol, OnClientCon
 
 	freeaddrinfo(res);
 	
-	clientConnect();
+	if (clientConnect != NULL) clientConnect();
 	return true;
 }
 
